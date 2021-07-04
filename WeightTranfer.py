@@ -56,16 +56,19 @@ class OBJECT_OT_WeightTransfer(Operator):
         sourceGroups = properties.vertGroup1.split(',')
 
         for group in sourceGroups:
-            vertGroup1 = obj.vertex_groups[group]
+            if group in obj.vertex_groups:
+                vertGroup1 = obj.vertex_groups[group]
             
-            vg_idx = vertGroup1.index
-            vs = [v for v in obj.data.vertices if vg_idx in [vg.group for vg in v.groups]]
+                vg_idx = vertGroup1.index
+                vs = [v for v in obj.data.vertices if vg_idx in [vg.group for vg in v.groups]]
 
-            for v in vs:
-                vertGroup0.add([v.index], 1.0, 'REPLACE')
+                for v in vs:
+                    vertGroup0.add([v.index], 1.0, 'REPLACE')
     
-            obj.vertex_groups.remove(vertGroup1)
+                obj.vertex_groups.remove(vertGroup1)
 
+        print("Weights transferred to: " + vertGroup0.name)
+        
         return {'FINISHED'}
     
 class OBJECT_OT_ObjectSelect(Operator):
