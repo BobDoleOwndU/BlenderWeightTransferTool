@@ -1,3 +1,9 @@
+bl_info = {
+    "name": "Weight Transfer",
+    "blender": (2, 80, 0),
+    "category": "Object",
+}
+
 import bpy
 
 from bpy.props import(
